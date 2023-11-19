@@ -4,6 +4,8 @@ namespace App\Console\Commands;
 
 use App\Models\Position;
 use App\Models\Profile;
+use App\Models\Project;
+use App\Models\ProjectWorker;
 use App\Models\Worker;
 use Illuminate\Console\Command;
 
@@ -28,15 +30,16 @@ class DevCommand extends Command
      */
     public function handle()
     {
-      // $this->prepareData();
-        $worker = Worker::find(3);
-       // dd($worker->position->title);
+       //$this->prepareData();
+       //$this->prepareManyToMany();
 
-        $position = Position::find(2);
-        $workers = $position->workers;
-        dd($workers->toArray());
+        $project = Project::find(2);
 
+        //dd($project->workers->toArray());
 
+        $worker = Worker::find(1);
+
+        dd($worker->projects->toArray());
 
     }
 
@@ -47,6 +50,10 @@ class DevCommand extends Command
         ]);
         $position_2 = Position::create([
             'title' => 'manager'
+        ]);
+
+        $position_3 = Position::create([
+            'title' => 'trener'
         ]);
 
         $workerData1 = [
@@ -81,9 +88,45 @@ class DevCommand extends Command
             'is_married' => true
         ];
 
+        $workerData4 = [
+            'name' => 'Test4',
+            'surname' => 'Testovich4',
+            'email' => 'test4@mail.ru',
+            'position_id' => $position_1->id,
+            'age' => 21,
+            'description' => 'test4 test4',
+            'is_married' => true
+        ];
+
+
+
+        $workerData5 = [
+            'name' => 'Test5',
+            'surname' => 'Testovich5',
+            'email' => 'test5@mail.ru',
+            'position_id' => $position_3->id,
+            'age' => 22,
+            'description' => 'test5 test5',
+            'is_married' => true
+        ];
+
+        $workerData6 = [
+            'name' => 'Test6',
+            'surname' => 'Testovich6',
+            'email' => 'test3@mail.ru',
+            'position_id' => $position_1->id,
+            'age' => 22,
+            'description' => 'test3 test6',
+            'is_married' => true
+        ];
+
         $worker1 = Worker::create($workerData1);
         $worker2 = Worker::create($workerData2);
         $worker3 = Worker::create($workerData3);
+
+        $worker4 = Worker::create($workerData4);
+        $worker5 = Worker::create($workerData5);
+        $worker6 = Worker::create($workerData6);
 
         $profileData = [
             'worker_id' => $worker1->id,
@@ -109,10 +152,75 @@ class DevCommand extends Command
             'finished_study_at' => '2023-06-01',
         ];
 
+        $profileData4 = [
+            'worker_id' => $worker4->id,
+            'city' => 'Rostov',
+            'skill' => 'css',
+            'experience' => 1,
+            'finished_study_at' => '2023-06-01',
+        ];
+
+        $profileData5 = [
+            'worker_id' => $worker5->id,
+            'city' => 'Rostov',
+            'skill' => 'css',
+            'experience' => 1,
+            'finished_study_at' => '2023-06-01',
+        ];
+
+        $profileData6 = [
+            'worker_id' => $worker6->id,
+            'city' => 'Rostov',
+            'skill' => 'css',
+            'experience' => 1,
+            'finished_study_at' => '2023-06-01',
+        ];
+
         $profile = Profile::create($profileData);
         $profile2 = Profile::create($profileData2);
         $profile3 = Profile::create($profileData3);
+        $profile4 = Profile::create($profileData4);
+        $profile5 = Profile::create($profileData5);
+        $profile6 = Profile::create($profileData6);
 
 
     }
+
+    public function prepareManyToMany() {
+            $workerWorker = Worker::find(1);
+            $workerManager = Worker::find(2);
+            $workerTrener = Worker::find(5);
+
+            $project1 = Project::create([
+                'title' => 'Project 1'
+            ]);
+
+            $project2 = Project::create([
+                'title' => 'Project 1'
+            ]);
+
+            ProjectWorker::create([
+                'worker_id' => $workerWorker->id,
+                'project_id' => $project1->id,
+            ]);
+
+        ProjectWorker::create([
+            'worker_id' => $workerManager->id,
+            'project_id' => $project1->id,
+        ]);
+
+        ProjectWorker::create([
+            'worker_id' => $workerTrener->id,
+            'project_id' => $project1->id,
+        ]);
+
+        ProjectWorker::create([
+            'worker_id' => $workerTrener->id,
+            'project_id' => $project2->id,
+        ]);
+
+    }
+
+
+
 }
