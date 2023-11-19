@@ -38,8 +38,11 @@ class DevCommand extends Command
         //dd($project->workers->toArray());
 
         $worker = Worker::find(1);
+        $project = Project::find(1);
 
-        dd($worker->projects->toArray());
+        $worker->projects()->attach($project->id);
+
+       // dd($worker->projects->toArray());
 
     }
 
