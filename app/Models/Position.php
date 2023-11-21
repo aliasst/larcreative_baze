@@ -14,6 +14,6 @@ class Position extends Model
     protected $guarded = false;
 
     public function workers() {
-        return $this->hasMany(Worker::class, 'position_id', 'id');
+        return $this->hasMany(Worker::class);
     }
 }

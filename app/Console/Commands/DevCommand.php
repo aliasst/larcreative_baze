@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use App\Models\Position;
 use App\Models\Profile;
 use App\Models\Project;
-use App\Models\ProjectWorker;
 use App\Models\Worker;
 use Illuminate\Console\Command;
 
@@ -37,12 +36,12 @@ class DevCommand extends Command
 
         //dd($project->workers->toArray());
 
-        $worker = Worker::find(1);
-        $project = Project::find(1);
+        $worker = Worker::find(5);
+        //$project = Project::find(1);
 
-        $worker->projects()->attach($project->id);
+        //$worker->projects()->attach($project->id);
 
-       // dd($worker->projects->toArray());
+       dd($worker->projects->toArray());
 
     }
 
@@ -199,27 +198,18 @@ class DevCommand extends Command
             ]);
 
             $project2 = Project::create([
-                'title' => 'Project 1'
+                'title' => 'Project 2'
             ]);
 
-            ProjectWorker::create([
-                'worker_id' => $workerWorker->id,
-                'project_id' => $project1->id,
+            $project1->workers()->attach([
+                $workerWorker->id,
+                $workerManager->id,
+                $workerTrener->id
             ]);
 
-        ProjectWorker::create([
-            'worker_id' => $workerManager->id,
-            'project_id' => $project1->id,
-        ]);
+            $project2->workers()->attach([
 
-        ProjectWorker::create([
-            'worker_id' => $workerTrener->id,
-            'project_id' => $project1->id,
-        ]);
-
-        ProjectWorker::create([
-            'worker_id' => $workerTrener->id,
-            'project_id' => $project2->id,
+            $workerTrener->id
         ]);
 
     }
