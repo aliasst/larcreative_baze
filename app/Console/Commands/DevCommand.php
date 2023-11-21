@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Client;
 use App\Models\Position;
 use App\Models\Profile;
 use App\Models\Project;
@@ -30,18 +31,24 @@ class DevCommand extends Command
     public function handle()
     {
        //$this->prepareData();
-       //$this->prepareManyToMany();
+      // $this->prepareManyToMany();
+        $worker = Worker::find(1);
 
-        $project = Project::find(2);
+        /* $worker->avatar()->create([
+            'path' => 'ava_1.png'
+        ]);
+        */
 
-        //dd($project->workers->toArray());
+       // dd($worker->avatar->toArray());
 
-        $worker = Worker::find(5);
-        //$project = Project::find(1);
+        $client = Client::find(1);
 
-        //$worker->projects()->attach($project->id);
+        $client->avatar()->create([
+            'path' => 'ava_2.jpg'
+        ]);
 
-       dd($worker->projects->toArray());
+        dd($client->avatar->toArray());
+
 
     }
 
