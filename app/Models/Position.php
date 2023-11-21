@@ -18,6 +18,7 @@ class Position extends Model
     }
 
     public function queryWorker() {
-        return $this->hasOne(Worker::class)->ofMany('age', 'max');
+        //return $this->hasOne(Worker::class)->ofMany('age', 'max');
+       return $this->hasOne(Worker::class)->where('surname', '=', 'Testovich6');
     }
 }
