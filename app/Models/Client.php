@@ -14,4 +14,12 @@ class Client extends Model
     public function avatar() {
         return $this->morphOne(Avatar::class, 'avatarable');
     }
+
+    public function reviews() {
+        return $this->morphMany(Review::class, 'reviewable');
+    }
+
+    public function tags() {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
 }

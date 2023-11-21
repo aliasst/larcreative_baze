@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Models\Position;
 use App\Models\Profile;
 use App\Models\Project;
+use App\Models\Review;
 use App\Models\Worker;
 use Illuminate\Console\Command;
 
@@ -30,30 +31,29 @@ class DevCommand extends Command
      */
     public function handle()
     {
-       //$this->prepareData();
-      // $this->prepareManyToMany();
-        $worker = Worker::find(1);
+       $this->prepareData();
+      $this->prepareManyToMany();
 
-        /* $worker->avatar()->create([
-            'path' => 'ava_1.png'
-        ]);
-        */
 
-       // dd($worker->avatar->toArray());
-
+       $worker = Worker::find(1);
         $client = Client::find(1);
 
-        $client->avatar()->create([
-            'path' => 'ava_2.jpg'
-        ]);
-
-        dd($client->avatar->toArray());
+        $worker->tags()->attach([1, 3]);
+        $client->tags()->attach([1, 2]);
 
 
     }
 
     public function prepareData()
     {
+        Client::create([
+            'name' => 'Bob'
+        ]);
+
+        Client::create([
+            'name' => 'John'
+        ]);
+
         $position_1 = Position::create([
             'title' => 'worker'
         ]);
