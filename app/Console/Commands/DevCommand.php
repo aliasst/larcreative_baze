@@ -31,15 +31,13 @@ class DevCommand extends Command
      */
     public function handle()
     {
-       $this->prepareData();
-      $this->prepareManyToMany();
+      // $this->prepareData();
+      // $this->prepareManyToMany();
 
 
-       $worker = Worker::find(1);
-        $client = Client::find(1);
+       $position = Position::find(1);
 
-        $worker->tags()->attach([1, 3]);
-        $client->tags()->attach([1, 2]);
+       dd($position->queryWorker->toArray());
 
 
     }
