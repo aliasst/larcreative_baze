@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             PositionSeed::class,
-            WorkerSeed::class
+           /* WorkerSeed::class,*/
+            ProfileSeeder::class
         ]);
 
         // \App\Models\User::factory(10)->create();
