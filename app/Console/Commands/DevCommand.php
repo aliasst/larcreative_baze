@@ -34,9 +34,12 @@ class DevCommand extends Command
 
         $worker = Worker::find(1);
 
-        $worker->update([
-            'age' => '25.000',
-        ]);
+        $worker->delete();
+
+        $worker = Worker::withTrashed()->find(1);
+        $worker->restore();
+
+        dd($worker);
 
     }
 
