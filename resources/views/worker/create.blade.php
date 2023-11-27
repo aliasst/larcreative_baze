@@ -3,7 +3,7 @@
 @section('content')
 
 <div>
-    <form action="{{ route('worker.store') }}" method="post">
+    <form action="{{ route('workers.store') }}" method="post">
         @csrf
         <div>
             <input type="text" name="name" placeholder="Имя" value="{{ old('name') }}">

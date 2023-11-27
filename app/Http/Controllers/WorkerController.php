@@ -22,7 +22,7 @@ class WorkerController extends Controller
 
         Worker::create($data);
 
-        return redirect()->route('worker.index');
+        return redirect()->route('workers.index');
 
 
     }
@@ -88,12 +88,12 @@ class WorkerController extends Controller
 
         $worker->update($data);
 
-        return redirect()->route('worker.edit', $worker->id);
+        return redirect()->route('workers.edit', $worker->id);
     }
 
-    public function delete(Worker $worker) {
+    public function destroy(Worker $worker) {
         $worker->delete();
-        return redirect()->route('worker.index');
+        return redirect()->route('workers.index');
 
     }
 
