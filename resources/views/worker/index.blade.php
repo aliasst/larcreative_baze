@@ -1,7 +1,9 @@
 @extends('layout.main')
 
 @section('content')
-<a><a href="{{ route('workers.create') }}">Добавить рабочего</a></div>
+  @can('create', \App\Models\Worker::class)
+ <div><a href="{{ route('workers.create') }}">Добавить рабочего</a></div>
+  @endcan
 <hr><br><br>
     <div>
         <form action="{{ route ('workers.index') }}">
@@ -35,8 +37,9 @@
         </div>
 
         <div><a href="{{ route('workers.show', $worker->id) }}">Просмотреть</a></div>
+        @can('update', $worker)
         <div><a href="{{ route('workers.edit', $worker->id) }}">Редактировать</a></div>
-
+        @endcan
         <hr>
     @endforeach
     <div class="my-nav">
