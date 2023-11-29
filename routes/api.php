@@ -19,4 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('workers', [\App\Http\Controllers\API\WorkerController::class, 'index']);
+Route::post('workers', [\App\Http\Controllers\API\WorkerController::class, 'store']);
+Route::patch('workers/{worker}', [\App\Http\Controllers\API\WorkerController::class, 'update']);
 Route::get('workers/{worker}', [\App\Http\Controllers\API\WorkerController::class, 'show']);
+Route::delete('workers/{worker}', [\App\Http\Controllers\API\WorkerController::class, 'destroy']);
