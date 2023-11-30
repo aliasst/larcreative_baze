@@ -9,6 +9,7 @@ use App\Models\Profile;
 use App\Models\Project;
 use App\Models\Review;
 use App\Models\Worker;
+use App\Http\Filters\Var1\WorkerFilter;
 use Illuminate\Console\Command;
 
 class DevCommand extends Command
@@ -33,7 +34,11 @@ class DevCommand extends Command
     public function handle()
     {
 
-        SomeJob::dispatch()->onQueue('some_queue');
+        $workerQuery = Worker::query();
+        $filter = new WorkerFilter(['from' => 25]);
+        $filter->applyFilter($workerQuery);
+        dd($workerQuery->get());
+
 
     }
 
