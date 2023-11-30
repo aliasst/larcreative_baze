@@ -3,9 +3,9 @@ namespace App\Http\Filters\Var1;
 
 use Illuminate\Database\Eloquent\Builder;
 
-class WorkerFilter
+class WorkerFilter extends Filter
 {
-    private array $params = [];
+
 
     const NAME = 'name';
     const SURNAME = 'surname';
@@ -15,13 +15,8 @@ class WorkerFilter
     const DESCRIPTION = 'description';
     const IS_MARRIED = 'is_married';
 
-    /**
-     * @param array $params
-     */
-    public function __construct(array $params)
-    {
-        $this->params = $params;
-    }
+
+
 
     public function getCallbacks (): array
     {
@@ -36,14 +31,7 @@ class WorkerFilter
         ];
     }
 
-    public function applyFilter(Builder $builder)
-    {
-        foreach ($this->getCallbacks() as $key => $callback) {
-            if(isset($this->params[$key])) {
-                $this->$callback($builder, $this->params[$key]);
-            }
-        }
-    }
+
 
 
     public function name (Builder $builder, $value) {

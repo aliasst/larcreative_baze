@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Events\Worker\CreatedEvent;
+use App\Http\Filters\Var1\Filter;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,6 +17,11 @@ class Worker extends Model
     protected $table = 'workers';
 
     protected $guarded = false;
+
+    public  function scopeFilter(Builder $builder, Filter $filter) {
+        $filter->applyFilter($builder);
+        return $builder;
+    }
 
     protected static function booted()
     {
